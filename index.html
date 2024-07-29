@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaglutide Reconstitution Calculator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #00b894;
+            --accent-color: #fdcb6e;
+            --text-color: #2d3436;
+            --background-color: #f9f9f9;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        h1, h2 {
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        #calculator {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        #calculator:hover {
+            transform: translateY(-5px);
+        }
+
+        form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #result {
+            margin-top: 1.5rem;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 184, 148, 0.1);
+            border-radius: 8px;
+        }
+
+        .instructions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .instruction-step {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .instruction-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .instruction-step i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        #contact form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #contact input[type="text"]:focus,
+        #contact input[type="email"]:focus,
+        #contact textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+        }
+
+        #contact textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Semaglutide Reconstitution Calculator</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#calculator">Calculator</a></li>
+                    <li><a href="#instructions">Instructions</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="home">
+            <h2>Welcome to the Semaglutide Reconstitution Calculator</h2>
+            <p>This calculator helps healthcare professionals accurately reconstitute Semaglutide for proper dosing. Enter the required information to calculate the concentration in mg/mL.</p>
+        </section>
+
+        <section id="calculator">
+            <h2>Calculator</h2>
+            <form id="calculatorForm">
+                <label for="vialContent">Vial Content (mg):</label>
+                <input type="number" id="vialContent" required>
+
+                <label for="diluent">Diluent Volume (mL):</label>
+                <input type="number" id="diluent" required>
+
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="result"></div>
+        </section>
+
+        <section id="instructions">
+            <h2>Reconstitution Instructions</h2>
+            <div class="instructions">
+                <div class="instruction-step">
+                    <i class="fas fa-search"></i>
+                    <p>Inspect vials and check expiration dates.</p>
+                </div>
+                <div class="instruction-step">
+                    <i class="fas fa-pump-medical"></i>
+                    <p>Swab vial tops with alcohol swabs.</p>
+                </div>
+                <div class="instruction-step">
+                    <i class="fas fa-syringe"></i>
+                    <p>Use a sterile syringe to draw the calculated amount of sterile water.</p>
+                </div>
+                <div class="instruction-step">
+                    <i class="fas fa-vial"></i>
+                    <p>Inject the water into the Semaglutide vial, aiming towards the side to minimize foaming.</p>
+                </div>
+                <div class="instruction-step">
+                    <i class="fas fa-sync"></i>
+                    <p>Gently swirl to dissolve; do not shake.</p>
+                </div>
+                <div class="instruction-step">
+                    <i class="fas fa-eye"></i>
+                    <p>Ensure the solution is clear and free of particles.</p>
+                </div>
+                <div class="instruction-step">
+                    <i class="fas fa-prescription-bottle"></i>
+                    <p>Draw the reconstituted solution as needed.</p>
+                </div>
+                <div class="instruction-step">
+                    <i class="fas fa-temperature-low"></i>
+                    <p>Store remaining solution as per instructions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Semaglutide Reconstitution Calculator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for calculator functionality
+        document.getElementById('calculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const vialContent = parseFloat(document.getElementById('vialContent').value);
+            const diluent = parseFloat(document.getElementById('diluent').value);
+            
+            if (vialContent && diluent) {
+                const concentration = vialContent / diluent;
+                document.getElementById('result').textContent = `Concentration: ${concentration.toFixed(2)} mg/mL`;
+                document.getElementById('result').style.display = 'block';
+            } else {
+                document.getElementById('result').textContent = 'Please enter valid numbers.';
+                document.getElementById('result').style.display = 'block';
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple form validation for contact form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message. We will get back to you soon!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
